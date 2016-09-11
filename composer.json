@@ -25,7 +25,7 @@
 
   "scripts": {
     "post-package-install": [
-       "php -r \"copy('config/behaviors.php', 'config/comment.php');\""
+        "mhndev\\yii2Comment\\installers::postInstall"
     ]
   }
 }
