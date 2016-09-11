@@ -1,0 +1,24 @@
+{
+  "name": "mhndev/yii2-comment",
+  "description": "comment implementation in Yii2",
+  "type": "yii2-extension",
+  "keywords": ["yii2","extension","comment","reply"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "majid abdolhosseini",
+      "email": "majid8911303@gmail.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "*"
+  },
+
+  "autoload": {
+    "psr-4": {
+      "mhndev\\yii2Comment\\": "src/"
+    }
+  },
+
+  "minimum-stability": "dev"
+}
