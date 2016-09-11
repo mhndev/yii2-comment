@@ -2,6 +2,7 @@
 
 namespace mhndev\yii2Comment;
 
+use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Module as BaseModule;
 use yii\console\Application as ConsoleApplication;
@@ -27,6 +28,8 @@ class Module extends BaseModule implements BootstrapInterface
     public function init()
     {
         parent::init();
+
+        Yii::setAlias('agencyModulePath', $this->getModule('agency')->getBasePath());
     }
 
     /**

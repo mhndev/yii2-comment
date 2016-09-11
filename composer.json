@@ -20,5 +20,12 @@
     }
   },
 
-  "minimum-stability": "dev"
+  "minimum-stability": "dev",
+
+
+  "scripts": {
+    "post-package-install": [
+      "./bin/install.sh"
+    ]
+  }
 }

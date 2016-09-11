@@ -8,6 +8,7 @@
 namespace mhndev\yii2Comment\controllers;
 
 use mhndev\yii2Comment\models\Comment;
+use Yii;
 use yii\rest\ActiveController;
 
 /**
@@ -30,4 +31,11 @@ class CommentController extends ActiveController
         'collectionEnvelope' => 'items',
     ];
 
+
+    public function behaviors()
+    {
+        $behaviors =  parent::behaviors();
+
+        return array_merge($behaviors, include Yii::getAlias('@app').DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'behaviors.php')[self::class];
+    }
 }
