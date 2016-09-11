@@ -25,7 +25,8 @@
 
   "scripts": {
     "post-install-cmd": [
-      "bash ./bin/install.sh"
+      //"bash ./bin/install.sh"
+       "php -r \"copy('config/behaviors.php', 'config/comment.php');\""
     ]
   }
 }
