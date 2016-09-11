@@ -25,7 +25,7 @@
 
   "scripts": {
     "post-package-install": [
-      "./bin/install.sh"
+      "bash ./bin/install.sh"
     ]
   }
 }
