@@ -24,7 +24,7 @@
 
 
   "scripts": {
-    "post-install-cmd": [
+    "post-package-install": [
        "php -r \"copy('config/behaviors.php', 'config/comment.php');\""
     ]
   }
