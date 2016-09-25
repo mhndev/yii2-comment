@@ -16,7 +16,7 @@ composer require --prefer-dist mhndev/yii2-comment "*"
 or add
 
 ```
-"mhndev/yii2-comment: "*"
+"mhndev/yii2-comment": "*"
 ```
 
 to the require section of your `composer.json` file.

@@ -29,7 +29,7 @@ class Module extends BaseModule implements BootstrapInterface
     {
         parent::init();
 
-        Yii::setAlias('agencyModulePath', $this->getModule('agency')->getBasePath());
+        Yii::setAlias('commentModulePath', Yii::getAlias('@vendor'));
     }
 
     /**

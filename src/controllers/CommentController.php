@@ -36,6 +36,9 @@ class CommentController extends ActiveController
     {
         $behaviors =  parent::behaviors();
 
-        return array_merge($behaviors, include Yii::getAlias('@app').DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'behaviors.php')[self::class];
+
+        $config = include Yii::getAlias('@app').DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'comment.php';
+
+        return array_merge($behaviors, $config[static::class]);
     }
 }
