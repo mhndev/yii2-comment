@@ -6,6 +6,7 @@ use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Module as BaseModule;
 use yii\console\Application as ConsoleApplication;
+use yii\web\Response;
 
 /**
  * Class Module
@@ -28,6 +29,8 @@ class Module extends BaseModule implements BootstrapInterface
     public function init()
     {
         parent::init();
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
 
         Yii::setAlias('commentModulePath', Yii::getAlias('@vendor'));
     }

@@ -1,12 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: majid
- * Date: 9/11/16
- * Time: 10:07 AM
- */
 namespace mhndev\yii2Comment\traits;
-use mhndev\yii2Comment\models\Comment;
+use mhndev\yii2Comment\interfaces\iComment;
+use mhndev\yii2Comment\interfaces\iCommentableEntity;
+use Yii;
 
 /**
  * Class CommentTrait
@@ -15,51 +11,59 @@ use mhndev\yii2Comment\models\Comment;
 trait CommentTrait
 {
 
+    /**
+     * @return iCommentableEntity
+     */
+    public function getEntity()
+    {
+        return $this->hasOne($this->entity , ['id'=>$this->entity_id]);
+    }
+
 
     /**
+     * @return iComment
+     */
+    public function getParent()
+    {
+        return $this->hasOne(self::class, ['parent_id'=>'id']);
+    }
+
+
+    /**
+     * @param $comment
      * @return mixed
-     */
-    public function getComments()
-    {
-        return $this->hasMany(Comment::class, ['entity'=>static::class, 'entity_id'=>$this->entity_id ]);
-    }
-
-
-    /**
-     * @return int
-     */
-    public function deleteAllComments()
-    {
-        return Comment::deleteAll(['entity'=>static::class, 'entity_id'=>$this->entity_id ]);
-    }
-
-    /**
-     * @param $id
      * @throws \Exception
      */
-    public function deleteCommentById($id)
+    public function getAllCommentReplies($comment)
     {
-        $comment = Comment::findOne(['id'=>$id]);
+        $items = static::find()->where(['=','parent_id',$comment->{$comment->primaryKey()[0]}])->all();
 
-        if($comment->entity = static::class && $comment->entity_id == $this->id){
-            $comment->delete();
-        }
-        else{
-            throw new \Exception('The comment is not for Object with class '.static::class.' and with id '.$this->id);
-        }
+        return $items;
     }
 
+
     /**
-     * @param Comment $comment
-     * @throws \Exception
+     * @param $user_id
+     * @param $text
+     * @return iComment
      */
-    public function deleteComment(Comment $comment)
+    public function reply($text, $user_id = null)
     {
-        if($comment->entity = static::class && $comment->entity_id == $this->id){
-            $comment->delete();
+        if(is_null($user_id)){
+            $user_id = Yii::$app->user->identity->id;
         }
-        else{
-            throw new \Exception('The comment is not for Object with class '.static::class.' and with id '.$this->id);
-        }
+
+        $comment = new self([
+            'user_id' => $user_id,
+            'entity' => $this->entity,
+            'entity_id' => $this->entity_id,
+            'text'      => $text,
+            'parent_id' => $this->{$this->primaryKey()[0]},
+            'depth'     => $this->depth + 1,
+        ]);
+
+        $comment->save();
+
+        return $comment;
     }
 }

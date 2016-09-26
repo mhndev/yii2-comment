@@ -2,6 +2,15 @@
 
 return [
 
+    'nested' => true,
+
+    'commentClass' => \mhndev\yii2Comment\models\Comment::class,
+
+    'entities' =>[
+        'agency' => \app\modules\agency\models\Agency::class
+    ],
+
+
     \mhndev\yii2Comment\controllers\CommentController::class => [
         'access'=> [
             'class'=>yii\filters\AccessControl::class,
